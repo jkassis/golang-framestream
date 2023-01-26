@@ -21,7 +21,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/farsightsec/golang-framestream"
+	framestream "jkassis.com/golang-framestream"
 )
 
 func main() {
