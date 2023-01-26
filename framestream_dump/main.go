@@ -21,7 +21,7 @@ import (
 	"log"
 	"os"
 
-	framestream "jkassis.com/golang-framestream"
+	framestream "github.com/jkassis/golang-framestream"
 )
 
 func main() {
