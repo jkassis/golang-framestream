@@ -127,6 +127,30 @@ func (w *Writer) WriteFrame(frame []byte) (n int, err error) {
 	return w.w.Write(frame)
 }
 
+// WriteCompoundFrame
+// writes the given frame to the underlying io.Writer with Frame Streams framing.
+func (w *Writer) WriteCompoundFrame(frame [][]byte) (n int, err error) {
+	var m int
+	for _, buf := range frame {
+		m += len(buf)
+	}
+
+	err = binary.Write(w.w, binary.BigEndian, uint32(m))
+	if err != nil {
+		return
+	}
+
+	for _, buf := range frame {
+		o, err := w.w.Write(buf)
+		n += o
+		if err != nil {
+			return n, err
+		}
+	}
+
+	return n, nil
+}
+
 // Flush ensures that any buffered data frames are written to the underlying
 // io.Writer.
 func (w *Writer) Flush() error {

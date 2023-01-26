@@ -68,3 +68,7 @@ func NewEncoder(w io.Writer, opt *EncoderOptions) (enc *Encoder, err error) {
 func (e *Encoder) Write(frame []byte) (int, error) {
 	return e.WriteFrame(frame)
 }
+
+func (e *Encoder) WriteCompound(frame [][]byte) (int, error) {
+	return e.WriteCompoundFrame(frame)
+}
